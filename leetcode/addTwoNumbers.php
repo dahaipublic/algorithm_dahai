@@ -75,10 +75,42 @@ class Solution
         return $newList->next;
 
     }
+
+    function addTwoNumbersOne($l1, $l2)
+    {
+        $obj = null;
+
+        $additional = 0;
+        do {
+            $value = $l1->val + $l2->val + $additional;
+            if ($value < 10) {
+                $additional = 0;
+            } else {
+                $value      -= 10;
+                $additional = 1;
+            }
+
+            $tmp_obj = new ListNode($value);
+
+            if (is_null($obj)) {
+                $obj = $tmp_obj;
+            } else {
+                $next->next = $tmp_obj;
+            }
+            $next = $tmp_obj;
+
+            $l1 = $l1->next;
+            $l2 = $l2->next;
+
+        } while ($l1 || $l2 || $additional);
+
+        return $obj;
+    }
 }
 
 $solution      = new Solution();
 $l1            = [2, 4, 3];
 $l2            = [5, 6, 4];
 $addTwoNumbers = $solution->addTwoNumbers($l1, $l2);
-var_dump($addTwoNumbers);
+$addTwoNumbersOne = $solution->addTwoNumbersOne($l1, $l2);
+var_dump($addTwoNumbers,$addTwoNumbersOne);
